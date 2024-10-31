@@ -1,6 +1,6 @@
 import { Turma } from "./models/Turma.js";
 
-const main = () => {
+const hardcoded = () => {
     const turma = new Turma();
 
     turma.inserirAluno("23456", "Bruno Carvalho");
@@ -18,4 +18,4 @@ const main = () => {
     turma.imprimirBoletim();
 };
 
-main();
+hardcoded();
