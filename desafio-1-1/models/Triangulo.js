@@ -59,6 +59,10 @@ export class Triangulo {
         return Math.sqrt(s * (s - this.#AB) * (s - this.#BC) * (s - this.#CA));
     }
 
+    get ladosOrdenados() {
+        return [this.#AB, this.#BC, this.#CA].sort((a, b) => a - b);
+    }
+
     static validar(AB, BC, CA) {
         return AB + BC > CA && BC + CA > AB && CA + AB > BC;
     }
@@ -67,11 +71,21 @@ export class Triangulo {
         return new Triangulo(triangulo.va, triangulo.vb, triangulo.vc);
     }
 
+    // SSS Congruence Rule
     static equals(t1, t2) {
-        return (
-            Vertice.equals(t1.va, t2.va) &&
-            Vertice.equals(t1.vb, t2.vb) &&
-            Vertice.equals(t1.vc, t2.vc)
-        );
+        // Igualdade por referência, já que os vértices não podem ser modificados
+        if (t1 !== t2) {
+            const a = t1.ladosOrdenados;
+            const b = t2.ladosOrdenados;
+
+            for (var i = 0; i < a.length; ++i) {
+                // Offset para comparar se os lados são "aproximadamente" iguais
+                if (Math.abs(a[i] - b[i]) >= 0.025) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
