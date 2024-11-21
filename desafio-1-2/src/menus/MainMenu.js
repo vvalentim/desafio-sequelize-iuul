@@ -1,14 +1,14 @@
 import { BaseMenu } from "./BaseMenu.js";
 
-import { AppointmentsMenu } from "./AppointmentsMenu.js";
-import { PatientsMenu } from "./PatientsMenu.js";
-
 export class MainMenu extends BaseMenu {
-    #patientsMenu = new PatientsMenu();
-    #appointmentsMenu = new AppointmentsMenu();
+    #patientsMenu;
+    #appointmentsMenu;
 
-    constructor() {
+    constructor(patientsMenu, appointmentsMenu) {
         super("Menu principal");
+
+        this.#patientsMenu = patientsMenu;
+        this.#appointmentsMenu = appointmentsMenu;
 
         this._addCommand("Cadastro de pacientes", this.showPatientsMenu);
         this._addCommand("Agenda", this.showAppointmentsMenu);
