@@ -14,8 +14,8 @@ import { isAllowedAge, isValidCpf, isValidName } from "../models/Patient/Patient
 import { isValidDateFormat } from "../helpers/validate.js";
 import { maskCpf } from "../helpers/masks.js";
 
-import { UniqueConstraintException } from "../errors/UniqueConstraintException.js";
 import { HasFutureAppointmentException } from "../models/Patient/errors/HasFutureAppointmentException.js";
+import { CpfAlreadyRegisteredException } from "../models/Patient/errors/CpfAlreadyRegisteredException.js";
 
 export class PatientsMenu extends BaseMenu {
     constructor() {
@@ -63,7 +63,7 @@ export class PatientsMenu extends BaseMenu {
 
             console.log("Paciente cadastrado com sucesso.\n");
         } catch (err) {
-            if (err instanceof UniqueConstraintException) {
+            if (err instanceof CpfAlreadyRegisteredException) {
                 console.log(`Erro: ${err.message}\n`);
 
                 return;

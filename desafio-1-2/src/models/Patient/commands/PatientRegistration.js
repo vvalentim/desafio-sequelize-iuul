@@ -1,4 +1,4 @@
-import { UniqueConstraintException } from "../../../errors/UniqueConstraintException.js";
+import { CpfAlreadyRegisteredException } from "../errors/CpfAlreadyRegisteredException.js";
 
 export class PatientRegistration {
     #patientRepository;
@@ -9,7 +9,7 @@ export class PatientRegistration {
 
     execute(patient) {
         if (this.#patientRepository.findByCpf(patient.cpf)) {
-            throw new UniqueConstraintException(`CPF '${patient.cpf}' já cadastrado.`);
+            throw new CpfAlreadyRegisteredException(`CPF '${patient.cpf}' já cadastrado.`);
         }
 
         this.#patientRepository.save(patient);
