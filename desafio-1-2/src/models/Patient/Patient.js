@@ -8,8 +8,8 @@ export class Patient {
 
     constructor({ id = null, cpf, name, birthdate }) {
         this.#id = id;
-        this.#cpf = cpf;
-        this.#name = name;
+        this.#cpf = cpf.replace(/\D/g, "");
+        this.#name = name.trim();
         this.#birthdate = birthdate;
     }
 

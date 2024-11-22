@@ -12,6 +12,7 @@ import { PatientRecordRemoval } from "../models/Patient/commands/PatientRecordRe
 import { getInputAndValidate } from "../helpers/getInput.js";
 import { isAllowedAge, isValidCpf, isValidName } from "../models/Patient/PatientValidators.js";
 import { isValidDateFormat } from "../helpers/validate.js";
+import { maskCpf } from "../helpers/masks.js";
 
 import { UniqueConstraintException } from "../errors/UniqueConstraintException.js";
 import { HasFutureAppointmentException } from "../models/Patient/errors/HasFutureAppointmentException.js";
@@ -113,7 +114,12 @@ export class PatientsMenu extends BaseMenu {
         });
 
         table.push(
-            ...records.map((record) => [record.cpf, record.name, record.birthdate, record.age])
+            ...records.map((record) => [
+                maskCpf(record.cpf),
+                record.name,
+                record.birthdate,
+                record.age,
+            ])
         );
 
         console.log(table.toString());

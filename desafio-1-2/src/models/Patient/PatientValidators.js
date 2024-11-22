@@ -2,6 +2,10 @@ import { DateTime } from "luxon";
 import { isAlphabetic } from "../../helpers/validate.js";
 
 const isValidCpf = (string) => {
+    if (/[^\d.-]/.test(string)) {
+        return false;
+    }
+
     string = string.replace(/\D/g, "");
 
     if (string.length != 11) {
