@@ -1,4 +1,4 @@
-import { getAgeFromDate } from "../helpers/getAgeFromDate.js";
+import { getAgeFromDate } from "../../helpers/getAgeFromDate.js";
 
 export class Patient {
     #id;
@@ -36,7 +36,7 @@ export class Patient {
     toString() {
         return JSON.stringify({
             id: this.id,
-            cpf: this.patientCpf,
+            cpf: this.cpf,
             name: this.name,
             birthdate: this.birthdate,
             age: this.age,

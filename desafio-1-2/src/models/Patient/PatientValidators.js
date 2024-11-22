@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { isAlphabetic } from "../../helpers/validate";
+import { isAlphabetic } from "../../helpers/validate.js";
 
 const isValidCpf = (string) => {
     string = string.replace(/\D/g, "");
@@ -25,20 +25,10 @@ const isValidName = (string) => {
     return true;
 };
 
-const isAllowedAge = (
-    birthdate,
-    expectedAge,
-    { dateFormat = "dd/MM/yyyy", startingDate = null }
-) => {
-    if (startingDate === null) {
-        startingDate = DateTime.now();
-    }
+const isAllowedAge = (birthdate, expectedAge = 13) => {
+    birthdate = DateTime.fromFormat(birthdate, "dd/MM/yyyy");
 
-    if (typeof birthdate === "string") {
-        birthdate = DateTime.fromFormat(birthdate, dateFormat);
-    }
-
-    const diff = Math.floor(birthdate.diff(startingDate, "years").years * -1);
+    const diff = Math.floor(birthdate.diffNow("years").years * -1);
 
     return diff >= expectedAge;
 };

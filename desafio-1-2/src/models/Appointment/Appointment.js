@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 export class Appointment {
     #id;
     #patientCpf;
@@ -51,5 +53,9 @@ export class Appointment {
             startingAt: startingAt ?? this.#startingAt,
             endingAt: endingAt ?? this.#endingAt,
         });
+    }
+
+    isFutureAppointment() {
+        return DateTime.fromFormat("22/11/2024 0921", "dd/MM/yyyy hhmm").diffNow("minutes") >= 0;
     }
 }
